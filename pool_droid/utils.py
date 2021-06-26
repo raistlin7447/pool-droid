@@ -51,5 +51,7 @@ def get_cabinet_temp():
 
 
 def get_relay_status(relay_num):
+    gpio_pin = RELAY_TO_GPIO_MAP[relay_num]
     GPIO.setmode(GPIO.BCM)
-    return GPIO.input(RELAY_TO_GPIO_MAP[relay_num])
+    GPIO.setup(gpio_pin, GPIO.OUT)
+    return GPIO.input(gpio_pin)
