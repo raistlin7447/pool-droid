@@ -2,7 +2,10 @@ import glob
 import os
 import time
 
-from pypentair import Pump
+try:
+    from pypentair import Pump
+except:
+    pass
 
 try:
     import RPi.GPIO as GPIO
@@ -51,13 +54,6 @@ def get_cabinet_temp():
             temp_f = temp_c * 9.0 / 5.0 + 32.0
             return temp_c, temp_f
     return None, None
-
-
-def get_relay_status(relay_num):
-    gpio_pin = RELAY_TO_GPIO_MAP[relay_num]
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(gpio_pin, GPIO.OUT)
-    return GPIO.input(gpio_pin)
 
 
 def get_pump_speed():
