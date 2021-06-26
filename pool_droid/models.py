@@ -11,7 +11,7 @@ class Relay(models.Model):
     gpio_bcm = models.PositiveSmallIntegerField(unique=True, help_text="GPIO Port Number")
     initial_state = models.BooleanField(default=False, help_text="State to initialize port to")
 
-    @admin.display(boolean=True)
+    @admin.display(boolean=True, description="Enabled")
     def get_state(self) -> bool:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.gpio_bcm, GPIO.OUT)

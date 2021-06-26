@@ -7,18 +7,6 @@ try:
 except:
     pass
 
-try:
-    import RPi.GPIO as GPIO
-except:
-    pass
-
-RELAY_TO_GPIO_MAP = {
-    1: 22,
-    2: 25,
-    3: 24,
-    4: 23
-}
-
 
 def get_one_wire_temp_probe():
     os.system('modprobe w1-gpio')
