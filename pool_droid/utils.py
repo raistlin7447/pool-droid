@@ -1,6 +1,17 @@
 import glob
 import os
 import time
+try:
+    import RPi.GPIO as GPIO
+except:
+    pass
+
+RELAY_TO_GPIO_MAP = {
+    1: 22,
+    2: 25,
+    3: 24,
+    4: 23
+}
 
 
 def get_one_wire_temp_probe():
@@ -37,3 +48,8 @@ def get_cabinet_temp():
             temp_f = temp_c * 9.0 / 5.0 + 32.0
             return temp_c, temp_f
     return None, None
+
+
+def get_relay_status(relay_num):
+    GPIO.setmode(GPIO.BCM)
+    return GPIO.input(RELAY_TO_GPIO_MAP[relay_num])
