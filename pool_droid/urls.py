@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from pool_droid.views import HomeView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', HomeView.as_view())
 ]
