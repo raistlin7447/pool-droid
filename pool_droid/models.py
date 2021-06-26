@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.db import models
 try:
     import RPi.GPIO as GPIO
@@ -10,13 +11,14 @@ class Relay(models.Model):
     gpio_bcm = models.PositiveSmallIntegerField(unique=True, help_text="GPIO Port Number")
     initial_state = models.BooleanField(default=False, help_text="State to initialize port to")
 
+    @admin.display(boolean=True)
     def get_state(self) -> bool:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.gpio_bcm, GPIO.OUT)
-        return GPIO.input(self.gpio_bcm)
+        return bool(GPIO.input(self.gpio_bcm))
 
     def set_state(self, state: bool) -> bool:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.gpio_bcm, GPIO.OUT)
         GPIO.output(self.gpio_bcm, state)
-        return GPIO.input(self.gpio_bcm)
+        return bool(GPIO.input(self.gpio_bcm))
