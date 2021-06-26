@@ -1,6 +1,9 @@
 import glob
 import os
 import time
+
+from pypentair import Pump
+
 try:
     import RPi.GPIO as GPIO
 except:
@@ -55,3 +58,7 @@ def get_relay_status(relay_num):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(gpio_pin, GPIO.OUT)
     return GPIO.input(gpio_pin)
+
+
+def get_pump_speed():
+    return Pump(1).status["rpm"]
