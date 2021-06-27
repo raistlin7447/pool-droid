@@ -4,3 +4,4 @@ Django==3.2.4
 -e git+git://github.com/cilynx/pypentair.git@master#egg=pypentair
 pytz==2021.1
 sqlparse==0.4.1
+w1thermsensor==2.0.0

@@ -1,7 +1,7 @@
 from django.contrib import admin, messages
 from django.utils.translation import ngettext
 
-from pool_droid.models import Relay
+from pool_droid.models import Relay, OneWireTempSensor
 
 
 @admin.register(Relay)
@@ -28,3 +28,8 @@ class RelayAdmin(admin.ModelAdmin):
             '%d relays were successfully disabled.',
             relays.count(),
         ) % relays.count(), messages.SUCCESS)
+
+
+@admin.register(OneWireTempSensor)
+class OneWireTempSensorAdmin(admin.ModelAdmin):
+    list_display = ["name", "address", "get_temps"]
