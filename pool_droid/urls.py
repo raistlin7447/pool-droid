@@ -16,11 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from pool_droid.views import HomeView, TestHomeView, Test2HomeView
+from pool_droid.views import HomeView, TestHomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view()),
-    path('test', TestHomeView.as_view()),
-    path('test2', Test2HomeView.as_view())
+    path('test', TestHomeView.as_view())
 ]
