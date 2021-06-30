@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views import View
 
-from pool_droid.models import Relay, OneWireTempSensor
+from pool_droid.models import Relay, OneWireTempSensor, PentairPump
 from pool_droid.utils import get_pump_speed
 
 
@@ -15,5 +15,8 @@ class HomeView(View):
         for relay in Relay.objects.all():
             relay_str += f"{relay.name}: {relay.get_state()}, "
 
-        pump_speed = get_pump_speed()
-        return HttpResponse(f"{temp_str}{relay_str} Pump Speed: {pump_speed}")
+        pump_str = ""
+        for pump in PentairPump.objects.all():
+            relay_str += f"{pump.name}: {pump.get_speed()}, "
+
+        return HttpResponse(f"{temp_str}{relay_str}{pump_str}")

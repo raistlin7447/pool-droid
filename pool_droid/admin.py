@@ -1,7 +1,7 @@
 from django.contrib import admin, messages
 from django.utils.translation import ngettext
 
-from pool_droid.models import Relay, OneWireTempSensor
+from pool_droid.models import Relay, OneWireTempSensor, PentairPump
 
 
 @admin.register(Relay)
@@ -33,3 +33,8 @@ class RelayAdmin(admin.ModelAdmin):
 @admin.register(OneWireTempSensor)
 class OneWireTempSensorAdmin(admin.ModelAdmin):
     list_display = ["name", "address", "get_temps"]
+
+
+@admin.register(PentairPump)
+class PentairPumpAdmin(admin.ModelAdmin):
+    list_display = ["name", "pump_address", "port", "baud_rate", "byte_size", "parity", "stop_bits", "get_speed"]
