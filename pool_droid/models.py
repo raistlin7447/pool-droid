@@ -50,7 +50,7 @@ class OneWireTempSensor(models.Model):
 
 class PentairPump(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    pump_address = models.CharField(max_length=4, choices=[(hex(v), k) for k, v in pypentair.ADDRESSES.items()])
+    pump_address = models.PositiveSmallIntegerField(choices=[(v, k) for k, v in pypentair.ADDRESSES.items()])
     port = models.CharField(max_length=100, unique=True)
     baud_rate = models.IntegerField(default=9600, choices=[(i, i) for i in serial.SerialBase.BAUDRATES])
     byte_size = models.FloatField(default=serial.EIGHTBITS, choices=[(i, i) for i in serial.SerialBase.BYTESIZES])
