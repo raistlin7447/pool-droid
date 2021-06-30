@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Temps</h2>
+        {% for sensor in sensors %}
+            {{ sensor.name }}: {{ sensor.get_temp_f }}<br />
+        {% endfor %}
+    </div>
+    <div class="col">
+      <h2>Relays</h2>
+        {% for relay in relays %}
+            {{ relay.name }}: {{ relay.get_state }}<br />
+        {% endfor %}
+
+    </div>
+    <div class="col">
+      <h2>Pumps</h2>
+        {% for pump in pumps %}
+            {{ pump.name }}: {{ pump.get_speed }}<br />
+        {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

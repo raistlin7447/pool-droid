@@ -3,7 +3,10 @@ from typing import Tuple
 import serial
 from django.contrib import admin
 from django.db import models
-from w1thermsensor import W1ThermSensor, Unit
+try:
+    from w1thermsensor import W1ThermSensor, Unit
+except:
+    pass
 
 import pypentair
 
