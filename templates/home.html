@@ -27,15 +27,15 @@
         {% for relay in relays %}
             {{ relay.name }}:
             {% if relay.get_state == True %}
-                <span style="font-size: 2em; color: red;">
+                <span style="font-size: 2em;">
                     <i class="fas fa-toggle-on"></i>
                 </span>
             {% elif relay.get_state == False %}
-                <span style="font-size: 2em; color: green;">
+                <span style="font-size: 2em;">
                     <i class="fas fa-toggle-off"></i>
                 </span>
             {% else %}
-                <span style="font-size: 2em; color: darkred;">
+                <span style="font-size: 2em;">
                     <i class="fas fa-question-circle"></i>
                 </span>
             {% endif %}
