@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Tuple
 
 import serial
@@ -103,8 +104,7 @@ class PentairPump(models.Model):
         else:
             status['timer'] = "No Active Timer"
 
-        time_h = status['time'][0] % 12
+        time_h = status['time'][0]
         time_m = status['time'][1]
-        am_pm = "am" if time_h <= 12 else "pm"
-        status['time'] = f"{time_h}:{time_m:02d} {am_pm}"
+        status['time'] = datetime.strptime(f"{time_h}:{time_m}", "%H:%M").strftime("%I:%M %p")
         return status
