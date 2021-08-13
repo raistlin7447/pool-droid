@@ -89,6 +89,8 @@ class PentairPump(models.Model):
         else:
             status['run'] = f"Unknown value {run}"
 
+        if status['mode'] == 9:
+            status['mode'] = "Manual"
         if status['mode'] == 13:
             status['mode'] = "Quick Clean"
 
