@@ -45,7 +45,10 @@
     <div class="col">
       <h2>Pumps</h2>
         {% for pump in pumps %}
-            {{ pump.name }}: {{ pump.get_speed }}<br />
+            <h3>{{ pump.name }}</h3>
+            {% for k, v in pump.get_status.items %}
+                {{ k }}: {{ v }}<br />
+            {% endfor %}
         {% endfor %}
     </div>
   </div>

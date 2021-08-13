@@ -19,12 +19,12 @@ class TestHomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['sensors'] = [{"name": "Cabinet", "get_temp_f": "98.6 F"}]
+        context['sensors'] = [{"name": "Cabinet", "get_temp_f": "98.6"}]
         context['relays'] = [
             {"name": "Booster Pump", "get_state": True},
             {"name": "Relay 2", "get_state": False},
             {"name": "Relay 3", "get_state": False},
             {"name": "Relay 4", "get_state": False},
         ]
-        context['pumps'] = [{"name": "Main Pump", "get_speed": "1750"}]
+        context['pumps'] = [{'name': 'Main Pump', 'get_status': PentairPump.format_status({'run': 4, 'mode': 0, 'watts': 0, 'rpm': 0, 'timer': [0, 0], 'time': [11, 13]})}]
         return context

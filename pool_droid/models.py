@@ -73,4 +73,36 @@ class PentairPump(models.Model):
 
     @admin.display(description="Current Speed")
     def get_speed(self):
-        return self.get_pump_connection().status["rpm"]
+        return self.get_status()["rpm"]
+
+    def get_status(self):
+        status = self.get_pump_connection().status
+        return self.format_status(status)
+
+    @staticmethod
+    def format_status(status):
+        run = status['run']
+        if run == 10:
+            status['run'] = "Running"
+        elif run == 4:
+            status['run'] = "Off"
+        else:
+            status['run'] = f"Unknown value {run}"
+
+        if status['mode'] == 13:
+            status['mode'] = "Quick Clean"
+
+        timer_m = status['timer'][0]
+        timer_s = status['timer'][1]
+        if timer_m or timer_s:
+            timer_m_str = f"{timer_m} hour" if timer_m == 1 else f"{timer_m} hours"
+            timer_s_str = f"{timer_s} minute" if timer_s == 1 else f"{timer_s} minutes"
+            status['timer'] = f"{timer_m_str} {timer_s_str}"
+        else:
+            status['timer'] = "No Active Timer"
+
+        time_h = status['time'][0] % 12
+        time_m = status['time'][1]
+        am_pm = "am" if time_h <= 12 else "pm"
+        status['time'] = f"{time_h}:{time_m:02d} {am_pm}"
+        return status
