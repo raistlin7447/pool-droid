@@ -13,6 +13,23 @@
   }
 </style>
 {% endblock style %}
+{% block javascript %}
+<script>
+    document.querySelector('.relays').addEventListener('click', fav);
+
+    function fav(e) {
+      const tgt = e.target;
+      if (tgt.classList.contains('fa-toggle-on')) {
+          console.log('Turn off relay: ' + tgt.parentNode.id);
+          tgt.classList.replace('fa-toggle-on', 'fa-toggle-off');
+      }
+      else if (tgt.classList.contains('fa-toggle-off')) {
+          console.log('Turn on relay: ' + tgt.parentNode.id);
+          tgt.classList.replace('fa-toggle-off', 'fa-toggle-on');
+      }
+    }
+</script>
+{% endblock javascript %}
 {% block content %}
 <div class="container">
   <div class="row">
@@ -22,23 +39,19 @@
             {{ sensor.name }}: {{ sensor.get_temp_f }}<br />
         {% endfor %}
     </div>
-    <div class="col">
+    <div class="col relays">
       <h2>Relays</h2>
         {% for relay in relays %}
             {{ relay.name }}:
+            <span style="font-size: 2em;" class="relay" id="relay_{{ relay.id }}">
             {% if relay.get_state == True %}
-                <span style="font-size: 2em;">
-                    <i class="fas fa-toggle-on"></i>
-                </span>
+                <i class="fas fa-toggle-on"></i>
             {% elif relay.get_state == False %}
-                <span style="font-size: 2em;">
-                    <i class="fas fa-toggle-off"></i>
-                </span>
+                <i class="fas fa-toggle-off"></i>
             {% else %}
-                <span style="font-size: 2em;">
-                    <i class="fas fa-question-circle"></i>
-                </span>
+                <i class="fas fa-question-circle"></i>
             {% endif %}
+            </span>
             <br />
         {% endfor %}
     </div>
@@ -49,6 +62,18 @@
             {% for k, v in pump.get_status.items %}
                 {{ k }}: {{ v }}<br />
             {% endfor %}
+            <span class="fa-layers fa-fw fa-2x">
+              <i class="far fa-circle"></i>
+              <strong class="fa-layers-text" data-fa-transform="shrink-6">1</strong>
+            </span>
+            <span class="fa-layers fa-fw fa-2x">
+              <i class="far fa-circle"></i>
+              <strong class="fa-layers-text" data-fa-transform="shrink-6">2</strong>
+            </span>
+            <span class="fa-layers fa-fw fa-2x">
+              <i class="far fa-circle"></i>
+              <strong class="fa-layers-text" data-fa-transform="shrink-9">QC</strong>
+            </span>
         {% endfor %}
     </div>
   </div>

@@ -80,6 +80,15 @@ class PentairPump(models.Model):
         status = self.get_pump_connection().status
         return self.format_status(status)
 
+    def start_quick_clean(self):
+        self.get_pump_connection().running_speed = "QUICK_CLEAN"
+
+    def set_speed(self, speed: int):
+        if 0 < speed < 8:
+            raise ValueError("Only speeds 1 through 8 are supported.")
+        speed_str = f"SPEED_{speed:d}"
+        self.get_pump_connection().running_speed = speed_str
+
     @staticmethod
     def format_status(status):
         run = status['run']
