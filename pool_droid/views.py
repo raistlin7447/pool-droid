@@ -43,7 +43,7 @@ class PumpModeAjax(View):
             pump_mode = pump_mode_json["pump-mode"]
             print(self.request.body)
             pump = PentairPump.objects.get()
-            if pump_mode == "QC":
+            if pump_mode == "qc":
                 pump.start_quick_clean()
             else:
                 pump.set_speed(int(pump_mode))
