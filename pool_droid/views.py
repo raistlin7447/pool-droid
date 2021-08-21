@@ -2,6 +2,7 @@ import json
 
 from django.http import JsonResponse
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
 from pool_droid.models import Relay, OneWireTempSensor, PentairPump
@@ -37,6 +38,7 @@ class TestHomeView(TemplateView):
 
 
 class PumpModeAjax(View):
+    @csrf_exempt
     def post(self, *args, **kwargs):
         if self.request.method == "POST":
             pump_mode_json = json.loads(self.request.body)
