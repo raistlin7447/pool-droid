@@ -84,7 +84,7 @@ class PentairPump(models.Model):
         self.get_pump_connection().running_speed = "QUICK_CLEAN"
 
     def set_speed(self, speed: int):
-        if 0 < speed < 8:
+        if not 0 < speed < 8:
             raise ValueError(f"Only speeds 1 through 8 are supported: {speed}")
         speed_str = f"SPEED_{speed:d}"
         self.get_pump_connection().running_speed = speed_str
