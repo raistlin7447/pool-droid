@@ -1,6 +1,7 @@
 import json
 
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
@@ -37,7 +38,7 @@ class TestHomeView(TemplateView):
         return context
 
 
-@csrf_exempt
+@method_decorator(csrf_exempt, name='dispatch')
 class PumpModeAjax(View):
     def post(self, *args, **kwargs):
         if self.request.method == "POST":
