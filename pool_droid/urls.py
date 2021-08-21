@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from pool_droid.views import HomeView, TestHomeView
+from pool_droid.views import HomeView, TestHomeView, PumpModeAjax
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view()),
-    path('test', TestHomeView.as_view())
+    path('test', TestHomeView.as_view()),
+    path('ajax/pump-mode', PumpModeAjax.as_view(), name="ajax-pump-mode")
 ]
