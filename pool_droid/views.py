@@ -37,8 +37,8 @@ class TestHomeView(TemplateView):
         return context
 
 
+@csrf_exempt
 class PumpModeAjax(View):
-    @csrf_exempt
     def post(self, *args, **kwargs):
         if self.request.method == "POST":
             pump_mode_json = json.loads(self.request.body)
