@@ -1,0 +1,24 @@
+.col {
+border: 2px solid green;
+padding: 10px;
+margin: 2px;
+background-color: #536397;
+color: white;
+}
+h2 {
+color: #68e1f2;
+}
+.relay {
+  cursor: pointer;
+}
+.pump-mode {
+  cursor: pointer;
+  padding: 20px;
+}
+.pump-mode-active {
+  background-color: white;
+  color: #536397;
+}
+.pump-mode-inactive {
+
+}
